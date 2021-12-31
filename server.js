@@ -31,7 +31,7 @@ socketIO.on("connection", function (socket) {
       cipherText = data.algorithm == 'sha' ? CryptoHelper.encyrptSha256(data.message, user.keys.publicKey) : CryptoHelper.encyrptSpn(data.message, user.keys.spnKey)
     }
 
-    var sendedMessage = {plainText : data.message, cipherText : cipherText};
+    var sendedMessage = {plainText : data.message, cipherText : cipherText.toString("base64")};
     socket.to(user.socketId).emit("messageReceived", sendedMessage);
   });
 
